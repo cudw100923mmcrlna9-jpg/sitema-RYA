@@ -8,5 +8,4 @@ equpio:
      eduardo
      jazmin
      maite
-
-     67
+     
