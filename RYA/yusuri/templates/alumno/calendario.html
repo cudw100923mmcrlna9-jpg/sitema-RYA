@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h3 class="text-white">Calendario Escolar Ciclo 2025-2026</h3>
+        <a href="{% url 'dashboard_alumno' %}" class="btn btn-dark rounded-pill">← Volver</a>
+    </div>
+    <div class="card-dashboard bg-white">
+        <div class="row g-3">
+            <div class="col-md-4"><span class="badge bg-success">■</span> Reinscripciones Ambas Zonas</div>
+            <div class="col-md-4"><span class="badge bg-info">■</span> Evaluación de Logro Académico</div>
+            <div class="col-md-4"><span class="badge bg-danger">■</span> Periodo Vacacional</div>
+            <div class="col-md-4"><span class="badge bg-warning">■</span> Registro de Evaluaciones Parciales</div>
+            <div class="col-md-4"><span class="badge bg-primary">■</span> Inicio / Fin de Semestre</div>
+            <div class="col-md-4"><span class="badge bg-secondary">■</span> Suspensión de Labores</div>
+        </div>
+        <hr>
+        <p class="text-muted text-center">Calendario Escolar CECyTEM</p>
+    </div>
+</div>
+{% endblock %}

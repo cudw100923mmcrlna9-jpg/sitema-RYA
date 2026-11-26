@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+    <div class="card-dashboard bg-light p-4">
+        <div class="d-flex justify-content-between mb-3">
+            <strong>Docente(s) del grupo: {{ request.user.perfil_estudiante.grupo }}</strong>
+            <span>Fecha de entrega: {% now "d/m/Y" %}</span>
+        </div>
+        <p>Al alumno(a): <strong>{{ request.user.nombre_completo }}</strong> de la carrera de <strong>{{ request.user.perfil_estudiante.carrera_tecnica }}</strong> se les solicita justificar la(s) falta(s).</p>
+        <form method="POST">
+            {% csrf_token %}
+            <table class="table table-bordered">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>materia</th>
+                        <th>nombre y firma del docente</th>
+                        <th>observaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ form.materia }}</td>
+                        <td><input type="text" class="form-control" placeholder="Pendiente de firma" disabled></td>
+                        <td>{{ form.motivo }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-dark rounded-pill px-4">Solicitar Justificante</button>
+            <a href="{% url 'dashboard_alumno' %}" class="btn btn-outline-dark rounded-pill px-4">Volver</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

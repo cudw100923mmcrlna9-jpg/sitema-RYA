@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h3 class="text-white">Buzón de notificaciones</h3>
+        <a href="{% url 'dashboard_alumno' %}" class="btn btn-dark rounded-pill">← Volver</a>
+    </div>
+    <div class="card-dashboard">
+        <table class="table table-bordered bg-white mb-0">
+            <tbody>
+                {% for n in notificaciones %}
+                <tr>
+                    <td>{{ n.mensaje }}</td>
+                    <td class="text-muted text-end">{{ n.fecha_creacion|timesince }}</td>
+                </tr>
+                {% empty %}
+                <tr><td>suspensión de clases el día viernes 14 de septiembre del 2025</td><td>hace 7 hrs</td></tr>
+                <tr><td>la alumna faltó el 11 de septiembre del 2026</td><td>hace 3 días</td></tr>
+                <tr><td>se ha generado un retardo el día 10 de septiembre del 2025</td><td>hace 4 días</td></tr>
+                <tr><td>la alumna ha asistido a todas sus clases</td><td>6 sep 2026</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

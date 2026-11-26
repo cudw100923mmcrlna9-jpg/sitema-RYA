@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+    <div class="card-dashboard p-4" style="background-color: #a8f0e4;">
+        <div class="d-flex justify-content-between bg-secondary-subtle p-2 rounded-pill px-4 mb-4">
+            <span>colegio de estudios científicos y tecnológicos del estado de méxico</span>
+            <span>día: {% now "d/m/Y" %}</span>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="fw-bold">nombre del estudiante:</label>
+                <input type="text" class="form-control" value="{{ request.user.nombre_completo }}" readonly>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4"><label class="fw-bold">grupo:</label><input type="text" class="form-control" value="{{ request.user.perfil_estudiante.grupo }}" readonly></div>
+                <div class="col-md-4"><label class="fw-bold">semestre:</label><input type="text" class="form-control" value="{{ request.user.perfil_estudiante.semestre }}" readonly></div>
+                <div class="col-md-4"><label class="fw-bold">hora de llegada:</label>{{ form.hora_llegada }}</div>
+            </div>
+            <div class="mb-4">
+                <label class="fw-bold">motivo por el cual se llegó tarde:</label>
+                {{ form.motivo }}
+            </div>
+            <button type="submit" class="btn btn-dark rounded-pill px-4">Registrar Retardo</button>
+            <a href="{% url 'dashboard_alumno' %}" class="btn btn-outline-dark rounded-pill px-4">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

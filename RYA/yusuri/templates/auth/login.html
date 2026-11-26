@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-white text-center mb-4">Inicio de Sesión - CECyTEM</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-4">{{ form.nombre }}</div>
+                <div class="mb-4">{{ form.correo }}</div>
+                <div class="mb-4">{{ form.password }}</div>
+                <div class="text-center mb-4">
+                    <button type="submit" class="btn btn-dark rounded-pill px-5 py-2">Entrar</button>
+                </div>
+            </form>
+
+            <h3 class="text-center text-dark my-4">registrarse como</h3>
+            <div class="row text-center g-3">
+                <div class="col-md-4">
+                    <a href="{% url 'registro_estudiante' %}" class="btn btn-rol w-100">registrarse como<br>estudiante</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'registro_estudiante' %}" class="btn btn-rol w-100">registrarse como<br>docente</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'registro_padre' %}" class="btn btn-rol w-100">registrarse padre de<br>familia</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

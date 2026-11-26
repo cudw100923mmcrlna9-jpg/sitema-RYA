@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h3 class="text-white">Perfil del Alumno</h3>
+        <a href="{% url 'dashboard_alumno' %}" class="btn btn-dark rounded-pill">← Volver</a>
+    </div>
+    <div class="row g-3">
+        <div class="col-12"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>alum@:</strong> {{ request.user.nombre_completo }}</div></div>
+        <div class="col-md-4"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>número de control:</strong> {{ perfil.numero_control }}</div></div>
+        <div class="col-md-4"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>curp:</strong> {{ perfil.curp }}</div></div>
+        <div class="col-md-4"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>correo institucional:</strong> {{ request.user.email }}</div></div>
+        <div class="col-md-4"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>plantel actual:</strong> {{ perfil.plantel }}</div></div>
+        <div class="col-md-8"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>localidad:</strong> {{ perfil.localidad }}</div></div>
+        <div class="col-md-3"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>promedio general:</strong> {{ perfil.promedio_general }}</div></div>
+        <div class="col-md-3"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>turno:</strong> {{ perfil.turno }}</div></div>
+        <div class="col-md-3"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>grupo:</strong> {{ perfil.grupo }}</div></div>
+        <div class="col-md-3"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>semestre actual:</strong> {{ perfil.semestre }}</div></div>
+        <div class="col-md-3"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>fecha nacimiento:</strong> {{ perfil.fecha_nacimiento }}</div></div>
+        <div class="col-md-3"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>estado nacimiento:</strong> {{ perfil.estado_nacimiento }}</div></div>
+        <div class="col-md-3"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>sexo:</strong> {{ perfil.sexo }}</div></div>
+        <div class="col-md-3"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>enfermedades:</strong> {{ perfil.enfermedades }}</div></div>
+        <div class="col-md-4"><div class="bg-secondary-subtle rounded-pill p-3 px-4"><strong>número de teléfono:</strong> {{ perfil.telefono }}</div></div>
+    </div>
+</div>
+{% endblock %}
