@@ -2,14 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Usuario, PerfilEstudiante, PerfilPadre, Calificacion, Asistencia, DocumentoTramite, Notificacion
+from .models import Usuario, PerfilEstudiante, PerfilPadre, Asistencia
 from .forms import (
     LoginForm,
     RegistroEstudianteForm,
     RegistroPadreForm,
     ReporteForm,
-    RetardoForm,
-    JustificanteForm,
 )
 
 def login_view(request):
@@ -90,23 +88,6 @@ def dashboard_alumno(request):
 
 
 @login_required
-def calificaciones_view(request):
-    semestre = int(request.GET.get('semestre', 3))
-    perfil = getattr(request.user, 'perfil_estudiante', None)
-    califs = Calificacion.objects.filter(estudiante=perfil, semestre=semestre) if perfil else []
-    return render(request, 'alumno/calificaciones.html', {
-        'califs': califs,
-        'semestre_actual': semestre
-    })
-
-
-@login_required
-def notificaciones_view(request):
-    notifs = Notificacion.objects.filter(usuario=request.user).order_by('-fecha_creacion')
-    return render(request, 'alumno/notificaciones.html', {'notificaciones': notifs})
-
-
-@login_required
 def generar_reporte(request):
     form = ReporteForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
@@ -119,41 +100,12 @@ def generar_reporte(request):
     return render(request, 'alumno/generar_reporte.html', {'form': form})
 
 
-@login_required
-def generar_retardo(request):
-    form = RetardoForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        retardo = form.save(commit=False)
-        retardo.estudiante = request.user.perfil_estudiante
-        retardo.tipo = 'retardo'
-        retardo.save()
-        messages.success(request, 'Retardo registrado correctamente.')
-        return redirect('dashboard_alumno')
-    return render(request, 'alumno/generar_retardo.html', {'form': form})
-
-
-@login_required
-def generar_justificante(request):
-    form = JustificanteForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        justificante = form.save(commit=False)
-        justificante.estudiante = request.user.perfil_estudiante
-        justificante.tipo = 'justificante'
-        justificante.save()
-        messages.success(request, 'Solicitud de justificante enviada.')
-        return redirect('dashboard_alumno')
-    return render(request, 'alumno/generar_justificante.html', {'form': form})
-
 
 @login_required
 def perfil_alumno(request):
     perfil = getattr(request.user, 'perfil_estudiante', None)
     return render(request, 'alumno/perfil.html', {'perfil': perfil})
 
-
-@login_required
-def calendario_view(request):
-    return render(request, 'alumno/calendario.html')
 
 
 @login_required

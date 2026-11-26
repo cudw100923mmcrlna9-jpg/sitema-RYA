@@ -45,59 +45,17 @@ class PerfilPadre(models.Model):
         return f"Padre: {self.usuario.nombre_completo} -> Alumno: {self.estudiante.numero_control}"
 
 
-class Calificacion(models.Model):
-    estudiante = models.ForeignKey(PerfilEstudiante, on_delete=models.CASCADE, related_name='calificaciones')
-    semestre = models.IntegerField(default=3)
-    materia = models.CharField(max_length=100)
-    parcial_1 = models.DecimalField(max_digits=4, decimal_places=1, default=0.0)
-    parcial_2 = models.DecimalField(max_digits=4, decimal_places=1, default=0.0)
-    parcial_3 = models.DecimalField(max_digits=4, decimal_places=1, default=0.0)
-
-    @property
-    def total(self):
-        return round((self.parcial_1 + self.parcial_2 + self.parcial_3) / 3, 1)
-
-    def __str__(self):
-        return f"{self.materia} - {self.estudiante.numero_control}"
-
-
-class Asistencia(models.Model):
-    ESTADOS = (
-        ('asistencia', 'Asistencia'),
-        ('falta', 'Falta'),
-        ('retardo', 'Retardo'),
-    )
-    estudiante = models.ForeignKey(PerfilEstudiante, on_delete=models.CASCADE, related_name='asistencias')
-    materia = models.CharField(max_length=100)
-    fecha = models.DateField(auto_now_add=True)
-    estado = models.CharField(max_length=15, choices=ESTADOS)
-
-    def __str__(self):
-        return f"{self.estudiante.numero_control} | {self.materia} | {self.estado}"
-
-
 class DocumentoTramite(models.Model):
     TIPOS = (
         ('reporte', 'Reporte'),
-        ('retardo', 'Retardo'),
-        ('justificante', 'Justificante'),
     )
     estudiante = models.ForeignKey(PerfilEstudiante, on_delete=models.CASCADE, related_name='tramites')
     tipo = models.CharField(max_length=20, choices=TIPOS)
     materia = models.CharField(max_length=100, blank=True)
     fecha = models.DateField(auto_now_add=True)
-    hora_llegada = models.TimeField(null=True, blank=True)
+    hora_sucedida = models.TimeField(null=True, blank=True)
     motivo = models.TextField()
     aprobado = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.get_tipo_display()} - {self.estudiante.usuario.nombre_completo}"
-
-
-class Notificacion(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='notificaciones')
-    mensaje = models.CharField(max_length=255)
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.usuario.nombre_completo}: {self.mensaje[:30]}"

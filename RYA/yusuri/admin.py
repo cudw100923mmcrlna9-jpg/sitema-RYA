@@ -7,7 +7,4 @@ from .models import Usuario, PerfilEstudiante, PerfilPadre, Calificacion, Asiste
 admin.site.register(Usuario)
 admin.site.register(PerfilEstudiante)
 admin.site.register(PerfilPadre)
-admin.site.register(Calificacion)
-admin.site.register(Asistencia)
 admin.site.register(DocumentoTramite)
-admin.site.register(Notificacion)

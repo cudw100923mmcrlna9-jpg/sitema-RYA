@@ -82,21 +82,5 @@ class ReporteForm(forms.ModelForm):
         }
 
 
-class RetardoForm(forms.ModelForm):
-    class Meta:
-        model = DocumentoTramite
-        fields = ['hora_llegada', 'motivo']
-        widgets = {
-            'hora_llegada': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
-            'motivo': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
-        }
 
 
-class JustificanteForm(forms.ModelForm):
-    class Meta:
-        model = DocumentoTramite
-        fields = ['materia', 'motivo']
-        widgets = {
-            'materia': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Matemáticas'}),
-            'motivo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Observaciones / Motivo de falta'}),
-        }
